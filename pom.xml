@@ -6,8 +6,7 @@
   <artifactId>com.sync.sz</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-
-  <name>com.sync.sz</name>
+  <name>javaweb示例</name>
   <url>http://maven.apache.org</url>
 
   <properties>
