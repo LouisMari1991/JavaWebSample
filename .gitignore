@@ -87,3 +87,5 @@ target
 .gitignore
 src/main/java/com/sync/sz/core/common/constans/
 src/test/
+
+*.imi
