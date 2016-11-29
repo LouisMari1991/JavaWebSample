@@ -84,6 +84,3 @@ gen
 hs_err_pid*
 
 target
-.gitignore
-src/main/java/com/sync/sz/core/common/constans/
-src/test/
