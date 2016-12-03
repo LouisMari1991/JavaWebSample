@@ -89,3 +89,4 @@ src/main/java/com/sync/sz/core/common/constans/
 src/test/
 
 *.imi
+src/main/resources/
