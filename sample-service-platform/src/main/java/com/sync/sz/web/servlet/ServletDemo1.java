@@ -26,7 +26,7 @@ public class ServletDemo1 extends HttpServlet{
   }
 
   /**
-   * 定时刷新
+   * 定时刷新浏览器:refresh
    * @param resp
    * @throws IOException
    */
