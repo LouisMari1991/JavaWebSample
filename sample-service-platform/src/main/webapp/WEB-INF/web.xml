@@ -5,5 +5,15 @@
   <welcome-file-list>
     <welcome-file>jsp/index.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>demo1</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.ServletDemo1</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>demo1</servlet-name>
+    <url-pattern>/demo1</url-pattern>
+  </servlet-mapping>
 
 </web-app>
