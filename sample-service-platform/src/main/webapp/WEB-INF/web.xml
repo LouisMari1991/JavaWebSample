@@ -17,4 +17,24 @@
     <url-pattern>/demo1</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>demo2</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.ServletDemo2</servlet-class>
+    <init-param>
+      <param-name>data</param-name>
+      <param-value>zzz</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>name</param-name>
+      <param-value>zbc</param-value>
+    </init-param>
+
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>demo2</servlet-name>
+    <url-pattern>/demo2</url-pattern>
+  </servlet-mapping>
+
 </web-app>
