@@ -24,12 +24,10 @@
       <param-name>data</param-name>
       <param-value>zzz</param-value>
     </init-param>
-
     <init-param>
       <param-name>name</param-name>
       <param-value>zbc</param-value>
     </init-param>
-
   </servlet>
 
   <servlet-mapping>
