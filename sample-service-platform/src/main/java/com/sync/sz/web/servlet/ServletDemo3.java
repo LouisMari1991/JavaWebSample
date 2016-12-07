@@ -7,8 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by Administrator on 2016/12/7 0007.
+  servletContext域：
+ 1.这是一个容器
+ 2.servletContext域这句话说明了这个容器的作用范围，也就是应用程序范围
  */
+
+// 通过servletContext实现ServletDemo3和ServletDemo4的数据共享
 public class ServletDemo3 extends HttpServlet {
 
   @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

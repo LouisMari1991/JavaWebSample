@@ -6,6 +6,11 @@
     <welcome-file>jsp/index.jsp</welcome-file>
   </welcome-file-list>
 
+  <context-param>
+    <param-name>data</param-name>
+    <param-value>Xxx</param-value>
+  </context-param>
+
   <servlet>
     <servlet-name>demo1</servlet-name>
     <servlet-class>com.sync.sz.web.servlet.ServletDemo1</servlet-class>
@@ -35,6 +40,11 @@
     <servlet-class>com.sync.sz.web.servlet.ServletDemo4</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>demo5</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.ServletDemo5</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>demo1</servlet-name>
     <url-pattern>/demo1</url-pattern>
@@ -53,6 +63,11 @@
   <servlet-mapping>
     <servlet-name>demo4</servlet-name>
     <url-pattern>/demo4</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>demo5</servlet-name>
+    <url-pattern>/demo5</url-pattern>
   </servlet-mapping>
 
 </web-app>

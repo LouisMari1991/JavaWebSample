@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletDemo2 extends HttpServlet {
 
   @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.doGet(req, resp);
-
     Enumeration<String> enumeration = this.getServletConfig().getInitParameterNames();
     while (enumeration.hasMoreElements()) {
       System.out.println(this.getServletConfig().getInitParameter(enumeration.nextElement()));
@@ -22,7 +20,6 @@ public class ServletDemo2 extends HttpServlet {
   }
 
   @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.doPost(req, resp);
     this.doGet(req, resp);
   }
 }
