@@ -45,7 +45,7 @@
         <configuration>
           <stopPort>9988</stopPort>
           <stopKey>foo</stopKey>
-          <scanIntervalSeconds>5</scanIntervalSeconds>
+          <scanIntervalSeconds>1</scanIntervalSeconds>
           <connectors>
             <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
               <port>8080</port>
