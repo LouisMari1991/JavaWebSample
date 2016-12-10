@@ -55,6 +55,11 @@
     <servlet-class>com.sync.sz.web.servlet.ResponseDemo2</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>ResponseDemo3</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.ResponseDemo3</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>demo1</servlet-name>
     <url-pattern>/demo1</url-pattern>
@@ -89,5 +94,10 @@
   <servlet-mapping>
     <servlet-name>ResponseDemo2</servlet-name>
     <url-pattern>/ResponseDemo2</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ResponseDemo3</servlet-name>
+    <url-pattern>/ResponseDemo3</url-pattern>
   </servlet-mapping>
 </web-app>
