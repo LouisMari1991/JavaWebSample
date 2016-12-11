@@ -14,18 +14,32 @@ import javax.servlet.http.HttpServletResponse;
 public class ResponseDemo3 extends HttpServlet {
 
   @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    test3(req, resp);
+    test4(req, resp);
   }
 
   /**
-   * 实用的跳转技术
+   * 控制浏览器缓存
    * @param req
    * @param resp
    * @throws ServletException
    * @throws IOException
    */
+  private void test4(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    resp.setDateHeader("expires", System.currentTimeMillis() + 1000 * 3600);
+
+    String data = "aaaaaaaaaa";
+    resp.getWriter().write(data);
+  }
+
+  /**
+   * 实用的跳转技术
+   *
+   * @throws ServletException
+   * @throws IOException
+   */
   private void test3(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    String message = "<meta http-equiv='refresh' content='3;url=/jsp/index.jsp'>恭喜你，登录成功，将在三秒后跳转首页，如果没有跳，请点击<a href='/jsp/message.jsp'>超链接</a>";
+    String message =
+        "<meta http-equiv='refresh' content='3;url=/jsp/index.jsp'>恭喜你，登录成功，将在三秒后跳转首页，如果没有跳，请点击<a href='/jsp/message.jsp'>超链接</a>";
     this.getServletContext().setAttribute("message", message);
     this.getServletContext().getRequestDispatcher("/jsp/message.jsp").forward(req, resp);
   }
