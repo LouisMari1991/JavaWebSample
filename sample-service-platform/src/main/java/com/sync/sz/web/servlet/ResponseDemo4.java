@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  1.浏览器会向服务器发送两次请求,意味着就有2个 request/response.
  2.重定向技术,浏览器地址栏会发生变化.
 
- 用户和显示购物车时,通常会用到重定向技术.
+ 用户登录和显示购物车时,通常会用到重定向技术.
 
  */
 public class ResponseDemo4 extends HttpServlet {
