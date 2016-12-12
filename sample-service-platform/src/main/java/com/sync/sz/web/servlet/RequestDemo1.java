@@ -1,6 +1,7 @@
 package com.sync.sz.web.servlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestDemo1 extends HttpServlet {
 
   @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    test2(req);
   }
 
+  /**
+   * 获取请求头相关的方法
+   * @param req
+   */
   private void test2(HttpServletRequest req) {
-    req.getHeader("");
+    Enumeration enumeration = req.getHeaderNames();
+    while (enumeration.hasMoreElements()) {
+      String name = (String) enumeration.nextElement();
+      String value = req.getHeader(name);
+      System.out.println(name + "=" + value);
+    }
   }
 
   /*
