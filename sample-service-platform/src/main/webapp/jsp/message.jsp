@@ -12,7 +12,12 @@
 </head>
 <body>
 
-    ${message}
+    ${data}
+
+    <%
+        String data = (String) request.getAttribute("data");
+        out.write(data);
+    %>
 
     <%
         String message = (String) application.getAttribute("message");
