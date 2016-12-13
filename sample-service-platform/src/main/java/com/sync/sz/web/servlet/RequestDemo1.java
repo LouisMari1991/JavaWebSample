@@ -13,6 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestDemo1 extends HttpServlet {
 
   @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    test3(req, resp);
+  }
+
+  /**
+   * 请求转发
+   * 特点：
+   * 1、客服端只发送一次请求，而服务器端有多个资源调用
+   * 2、客服端浏览地址栏没有变化
+   */
+  private void test3(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String data = "aaabbbccc";
     req.setAttribute("data",data);
     req.getRequestDispatcher("/jsp/message.jsp").forward(req, resp);
@@ -50,6 +60,7 @@ public class RequestDemo1 extends HttpServlet {
   }
 
   @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    this.doGet(req, resp);
+    String username = req.getParameter("username");
+    System.out.println(username);
   }
 }
