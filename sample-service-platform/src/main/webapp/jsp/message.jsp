@@ -12,6 +12,8 @@
 </head>
 <body>
 
+    ${message}
+
     <%
         String message = (String) application.getAttribute("message");
         out.write(message);

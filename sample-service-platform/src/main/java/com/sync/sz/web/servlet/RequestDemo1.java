@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestDemo1 extends HttpServlet {
 
   @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    
+    String data = "aaabbbccc";
+    req.setAttribute("message",data);
+    req.getRequestDispatcher("/jsp/message.jsp").forward(req, resp);
   }
 
   /**
