@@ -85,6 +85,16 @@
     <servlet-class>com.sync.sz.web.servlet.cookie.CookieDemo3</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>SessionDemo1</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.session.SessionDemo1</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>SessionDemo2</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.session.SessionDemo2</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>demo1</servlet-name>
     <url-pattern>/demo1</url-pattern>
@@ -150,6 +160,17 @@
   <servlet-mapping>
     <servlet-name>CookieDemo3</servlet-name>
     <url-pattern>/CookieDemo3</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SessionDemo1</servlet-name>
+    <url-pattern>/SessionDemo1</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet-mapping>
+    <servlet-name>SessionDemo2</servlet-name>
+    <url-pattern>/SessionDemo2</url-pattern>
   </servlet-mapping>
 
 </web-app>
