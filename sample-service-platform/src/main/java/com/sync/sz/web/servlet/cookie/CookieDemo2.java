@@ -5,11 +5,14 @@ import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 显示商品浏览历史
+ *
  * Created by Administrator on 2016/12/14 0014.
  */
 public class CookieDemo2 extends HttpServlet {
@@ -20,11 +23,24 @@ public class CookieDemo2 extends HttpServlet {
     resp.setContentType("text/html;charset=UTF-8");
 
     PrintWriter out = resp.getWriter();
-    out.write("本网站有如下商品:");
+    out.write("本网站有如下商品:<br/>");
     Map<String, Book> map = Db.getAll();
     for (Map.Entry<String, Book> entry : map.entrySet()) {
       Book book = entry.getValue();
       out.print("<a href='/CookieDemo3?id=" + book.getId() + "' target='_blank'>" + book.getName() + "</a><br/>");
+    }
+    Cookie[] cookies = req.getCookies();
+    if (cookies != null) {
+      out.print("您曾今看过如下商品:<br/>");
+      for (int i = 0; cookies != null && i < cookies.length; i++) {
+        if (cookies[i].getName().equals("bookHistory")) {
+          String[] ids = cookies[i].getValue().split("\\,");
+          for (String id : ids) {
+            Book book = Db.getAll().get(id);
+            out.print(book.getName() + "<br/>");
+          }
+        }
+      }
     }
   }
 
