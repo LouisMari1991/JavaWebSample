@@ -106,6 +106,21 @@
     <servlet-class>com.sync.sz.web.servlet.session.SessionDemo2</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>ListBookServlet</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.shopping.ListBookServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>BuyServlet</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.shopping.BuyServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ListCartServlet</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.shopping.ListCartServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
     <url-pattern>/WelcomeServlet</url-pattern>
@@ -187,6 +202,21 @@
   <servlet-mapping>
     <servlet-name>SessionDemo2</servlet-name>
     <url-pattern>/SessionDemo2</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ListBookServlet</servlet-name>
+    <url-pattern>/ListBookServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BuyServlet</servlet-name>
+    <url-pattern>/BuyServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ListCartServlet</servlet-name>
+    <url-pattern>/ListCartServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
