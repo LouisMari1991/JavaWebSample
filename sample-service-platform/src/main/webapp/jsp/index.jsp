@@ -5,7 +5,9 @@
     <title>index</title>
 </head>
 <body>
-    <a href="/SessionDemo1">购买</a>
-    <a href="/SessionDemo2">结账</a>
+    欢迎您: ${user.username}
+    <br/>
+    <a href="/SessionDemo1">购买</a><br/>
+    <a href="/SessionDemo2">结账</a><br/>
 </body>
 </html>
