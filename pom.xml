@@ -8,7 +8,7 @@
 
   <modules>
     <module>sample-core</module>
-    <module>sample-service-platform</module>
+    <module>sample-servlet</module>
   </modules>
 
   <packaging>pom</packaging>

@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>sample-service-platform</artifactId>
-  <name>sample-service-platform</name>
+  <artifactId>sample-servlet</artifactId>
+  <name>sample-servlet</name>
   <packaging>war</packaging>
 
   <properties>
