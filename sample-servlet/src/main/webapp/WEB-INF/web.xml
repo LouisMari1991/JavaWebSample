@@ -131,6 +131,11 @@
     <servlet-class>com.sync.sz.web.servlet.login.LogoutServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>DoFromServlet</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.DoFromServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
     <url-pattern>/WelcomeServlet</url-pattern>
@@ -237,6 +242,11 @@
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DoFromServlet</servlet-name>
+    <url-pattern>/DoFromServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
