@@ -24,7 +24,7 @@ public class BuyServlet extends HttpServlet {
     //cookie.setMaxAge(30 * 60);
     List<Book> list = (List<Book>) session.getAttribute("list");
     if (list == null) {
-      list = new ArrayList<>();
+      list = new ArrayList<Book>();
       session.setAttribute("list", list);
     }
     list.add(book);
