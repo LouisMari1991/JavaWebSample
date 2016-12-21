@@ -23,9 +23,10 @@ public class TimeServer {
             server = new ServerSocket(port);
             System.out.printf("The time server is start in port : " + port);
             Socket socket = null;
+            TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(50, 1000);
             while (true) {
                 socket = server.accept();
-                new Thread(new TimeServerHandler(socket)).start();
+                singleExecutor.exector(new TimeServerHandler(socket));
             }
         } finally {
             if (server != null) {
