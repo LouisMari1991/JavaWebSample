@@ -56,15 +56,15 @@
             <contextPath>/</contextPath>
           </webAppConfig>
         </configuration>
-        <executions>
-          <!-- 在打包成功后使用jetty:run来运行jetty服务 -->
+       <!-- <executions>
+          &lt;!&ndash; 在打包成功后使用jetty:run来运行jetty服务 &ndash;&gt;
           <execution>
             <phase>package</phase>
             <goals>
               <goal>run</goal>
             </goals>
           </execution>
-        </executions>
+        </executions>-->
       </plugin>
 
       <plugin>
