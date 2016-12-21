@@ -32,7 +32,7 @@ public class TimeServerHandler implements Runnable {
                 if (body == null) break;
                 System.out.printf("The time server receiver order : " + body);
                 currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
-                System.out.printf(currentTime);
+                out.println(currentTime);
             }
         } catch (Exception e) {
             if (in != null) {
@@ -43,6 +43,7 @@ public class TimeServerHandler implements Runnable {
                 }
             }
             if (out != null) {
+                
                 out.close();
                 out = null;
             }
