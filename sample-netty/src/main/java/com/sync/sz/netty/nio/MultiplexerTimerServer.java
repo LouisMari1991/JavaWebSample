@@ -2,6 +2,7 @@ package com.sync.sz.netty.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -83,6 +84,16 @@ public class MultiplexerTimerServer implements Runnable {
                 SocketChannel sc = ssc.accept();
                 sc.configureBlocking(false);
             }
+        }
+    }
+
+    private void doWrite(SocketChannel channel, String response) throws IOException {
+        if (response != null && response.trim().length() > 0) {
+            byte[] bytes = response.getBytes();
+            ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
+            writeBuffer.put(bytes);
+            writeBuffer.flip();
+            channel.write(writeBuffer);
         }
     }
 
