@@ -26,7 +26,7 @@ public class MultiplexerTimerServer implements Runnable {
     try {
       selector = Selector.open();
       servChannel = ServerSocketChannel.open();
-      servChannel.configureBlocking(false);
+      servChannel.configureBlocking(false); // 设置为异步非阻塞状态
       servChannel.bind(new InetSocketAddress(port), 1024);
       servChannel.register(selector, SelectionKey.OP_ACCEPT);
       System.out.println("The time server start in port : " + port);
@@ -43,7 +43,7 @@ public class MultiplexerTimerServer implements Runnable {
   @Override public void run() {
     while (!stop) {
       try {
-        selector.select(100);
+        selector.select(100); // 休眠一秒
         Set<SelectionKey> selectedKeys = selector.selectedKeys();
         Iterator<SelectionKey> it = selectedKeys.iterator();
         SelectionKey key = null;
