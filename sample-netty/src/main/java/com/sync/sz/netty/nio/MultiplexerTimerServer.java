@@ -7,6 +7,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -82,6 +83,30 @@ public class MultiplexerTimerServer implements Runnable {
         ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
         SocketChannel sc = ssc.accept();
         sc.configureBlocking(false);
+        // Add the new connection to the selector
+        sc.register(selector, SelectionKey.OP_READ);
+      }
+      if (key.isReadable()) {
+        // Read the data
+        SocketChannel sc = (SocketChannel) key.channel();
+        ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+        int readBytes = sc.read(readBuffer);
+        if (readBytes > 0) {
+          readBuffer.flip();
+          byte[] bytes = new byte[readBuffer.remaining()];
+          readBuffer.get(bytes);
+          String body = new String(bytes, "UTF-8");
+          System.out.println("The time server receiver order : " + body);
+          String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ?
+              new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
+          doWrite(sc, currentTime);
+        } else if (readBytes < 0) {
+          // 对端链路关闭
+          key.cancel();
+          sc.close();
+        } else {
+          ; // 读到0字节,忽略
+        }
       }
     }
   }
