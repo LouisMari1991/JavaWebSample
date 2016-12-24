@@ -48,8 +48,9 @@
           <scanIntervalSeconds>1</scanIntervalSeconds>
           <connectors>
             <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-              <port>8080</port>
+              <port>8081</port>
               <maxIdleTime>60000</maxIdleTime>
+              <useDirectBuffers>false</useDirectBuffers><!-- 默认值是true，true时会导致在jetty运行时js文件不能修改 -->
             </connector>
           </connectors>
           <webAppConfig>
