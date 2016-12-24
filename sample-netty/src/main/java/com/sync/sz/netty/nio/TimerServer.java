@@ -14,5 +14,7 @@ public class TimerServer {
         // Use default port
       }
     }
+    MultiplexerTimerServer timerServer = new MultiplexerTimerServer(port);
+    new Thread(timerServer, "NIO-MultiplexerTimeServer-001").start();
   }
 }

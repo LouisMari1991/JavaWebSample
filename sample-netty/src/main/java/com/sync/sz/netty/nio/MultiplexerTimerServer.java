@@ -22,13 +22,18 @@ public class MultiplexerTimerServer implements Runnable {
 
   private volatile boolean stop;
 
+  /**
+   * 初始化多路复用器，绑定监听端口
+   *
+   * @param port
+   */
   public MultiplexerTimerServer(int port) {
     try {
-      selector = Selector.open();
-      servChannel = ServerSocketChannel.open();
+      selector = Selector.open(); // 创建多路复用器
+      servChannel = ServerSocketChannel.open(); // 打开ServerSocketChannel,用于监听客服端的连接，它是所有的客服端连接的父管道
       servChannel.configureBlocking(false); // 设置为异步非阻塞状态
-      servChannel.bind(new InetSocketAddress(port), 1024);
-      servChannel.register(selector, SelectionKey.OP_ACCEPT);
+      servChannel.bind(new InetSocketAddress(port), 1024); // 绑定监听端口
+      servChannel.register(selector, SelectionKey.OP_ACCEPT); // 将ServerSocketChannel注册到多路复用器Selector上，监听ACCEPT时间
       System.out.println("The time server start in port : " + port);
     } catch (IOException e) {
       e.printStackTrace();
@@ -44,7 +49,7 @@ public class MultiplexerTimerServer implements Runnable {
     while (!stop) {
       try {
         selector.select(100); // 休眠一秒
-        Set<SelectionKey> selectedKeys = selector.selectedKeys();
+        Set<SelectionKey> selectedKeys = selector.selectedKeys(); // 轮询准备就绪的Key
         Iterator<SelectionKey> it = selectedKeys.iterator();
         SelectionKey key = null;
         while (it.hasNext()) {
@@ -81,7 +86,7 @@ public class MultiplexerTimerServer implements Runnable {
       if (key.isAcceptable()) {
         // Accept the new connection
         ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
-        SocketChannel sc = ssc.accept();
+        SocketChannel sc = ssc.accept(); // 多路复用器监听到有新的客户端接入，处理新的接入请求，完成TCP三次握手，建立物理链路
         sc.configureBlocking(false);
         // Add the new connection to the selector
         sc.register(selector, SelectionKey.OP_READ);
