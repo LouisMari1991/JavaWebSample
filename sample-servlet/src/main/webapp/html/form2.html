@@ -3,13 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>form2</title>
+
+  <script type="text/javascript">
+
+    /*
+    var iscommitted = false;
+
+    function dosubmit() {
+      if (!iscommitted) {
+        iscommitted = true;
+        return true;
+      } else {
+        return false;
+      }
+    }
+    */
+    
+    function dosubmit() {
+      var input = document.getElementById("submit");
+      input.disabled = 'disabled';
+      return true;
+    }
+
+  </script>
+
 </head>
 <body>
 
-  <form action="/BuyServlet">
-
-
-  </form>
+<form action="/DoFromServlet" method="post" onsubmit="return dosubmit()">
+  用户名：<input type="text" name="username"/>
+  <input id="submit" type="submit" value="提交"/>
+</form>
 
 </body>
 </html>

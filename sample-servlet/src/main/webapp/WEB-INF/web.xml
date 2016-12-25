@@ -133,7 +133,7 @@
 
   <servlet>
     <servlet-name>DoFromServlet</servlet-name>
-    <servlet-class>com.sync.sz.web.servlet.DoFromServlet</servlet-class>
+    <servlet-class>com.sync.sz.web.servlet.form.DoFormServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
