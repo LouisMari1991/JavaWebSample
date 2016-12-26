@@ -7,15 +7,15 @@ import java.nio.channels.CompletionHandler;
 /**
  * Created by Administrator on 2016/12/24 0024.
  */
-public class AcceptCompletionHandler implements CompletionHandler<AsynchronousSocketChannel, AsyncTimerServerHandler> {
+public class AcceptCompletionHandler implements CompletionHandler<AsynchronousSocketChannel, AsyncTimeServerHandler> {
 
-  @Override public void completed(AsynchronousSocketChannel result, AsyncTimerServerHandler attachment) {
+  @Override public void completed(AsynchronousSocketChannel result, AsyncTimeServerHandler attachment) {
     attachment.asynchronousServerSocketChannel.accept(attachment, this);
     ByteBuffer buffer = ByteBuffer.allocate(1024);
-
+    result.read(buffer, buffer, new ReadCompletionHandler(result));
   }
 
-  @Override public void failed(Throwable exc, AsyncTimerServerHandler attachment) {
+  @Override public void failed(Throwable exc, AsyncTimeServerHandler attachment) {
     exc.printStackTrace();
     attachment.latch.countDown();
   }
