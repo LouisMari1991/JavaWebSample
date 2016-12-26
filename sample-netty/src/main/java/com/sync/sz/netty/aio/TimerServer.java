@@ -14,7 +14,7 @@ public class TimerServer {
         // 使用默认端口
       }
     }
-    AsyncTimerServerHandler timeServer = new AsyncTimerServerHandler(port);
+    AsyncTimeServerHandler timeServer = new AsyncTimeServerHandler(port);
     new Thread(timeServer, "AIO-AsyncTimeServerHandler-001").start();
   }
 

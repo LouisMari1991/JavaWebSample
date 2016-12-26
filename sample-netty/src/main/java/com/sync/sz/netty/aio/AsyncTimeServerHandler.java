@@ -8,14 +8,14 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Created by Administrator on 2016/12/24 0024.
  */
-public class AsyncTimerServerHandler implements Runnable {
+public class AsyncTimeServerHandler implements Runnable {
 
   private int port;
 
   CountDownLatch latch;
   AsynchronousServerSocketChannel asynchronousServerSocketChannel;
 
-  public AsyncTimerServerHandler(int port) {
+  public AsyncTimeServerHandler(int port) {
     this.port = port;
     try {
       asynchronousServerSocketChannel = AsynchronousServerSocketChannel.open();
