@@ -28,6 +28,7 @@ public class AsyncTimerServerHandler implements Runnable {
 
   @Override public void run() {
     latch = new CountDownLatch(1);
+    doAccept();
     try {
       latch.await();
     } catch (InterruptedException e) {
@@ -35,8 +36,7 @@ public class AsyncTimerServerHandler implements Runnable {
     }
   }
 
-  public void doAccept(){
-    //asynchronousServerSocketChannel.accept(this, new Acc);
+  public void doAccept() {
+    asynchronousServerSocketChannel.accept(this, new AcceptCompletionHandler());
   }
-
 }
