@@ -39,7 +39,7 @@ public class TimeClient {
       try {
         port = Integer.valueOf(port);
       } catch (NumberFormatException e) {
-
+        // 使用默认端口
       }
     }
     new TimeClient().connect(port, "127.0.0.1");
