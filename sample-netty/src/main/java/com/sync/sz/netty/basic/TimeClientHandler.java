@@ -1,6 +1,5 @@
 package com.sync.sz.netty.basic;
 
-import com.sync.sz.netty.nio.TimeClientHandle;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
@@ -12,7 +11,7 @@ import java.util.logging.Logger;
  */
 public class TimeClientHandler extends ChannelHandlerAdapter {
 
-  private static final Logger logger = Logger.getLogger(TimeClientHandle.class.getName());
+  private static final Logger logger = Logger.getLogger(TimeClientHandler.class.getName());
 
   private final ByteBuf firstMessage;
 
