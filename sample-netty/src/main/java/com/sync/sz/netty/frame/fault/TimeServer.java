@@ -48,7 +48,7 @@ public class TimeServer {
       try {
         port = Integer.valueOf(args[0]);
       } catch (NumberFormatException e) {
-
+        // 使用默认端口
       }
     }
     new TimeServer().bind(port);
