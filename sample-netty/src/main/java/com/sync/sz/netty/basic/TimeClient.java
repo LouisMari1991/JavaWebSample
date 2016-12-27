@@ -28,7 +28,7 @@ public class TimeClient {
       ChannelFuture f = b.connect(host, port).sync();
       f.channel().closeFuture().sync();
     } finally {
-      // 优雅推出，释放NIO线程组
+      // 优雅退出，释放NIO线程组
       group.shutdownGracefully();
     }
   }
