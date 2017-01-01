@@ -1,4 +1,4 @@
-package com.sync.sz.netty.codec.serializable;
+package com.sync.sz.netty.codec.serializable.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
