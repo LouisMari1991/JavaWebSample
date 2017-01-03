@@ -7,9 +7,7 @@ import io.netty.channel.ChannelHandlerAdapter;
  */
 public class SubReqClientHandler extends ChannelHandlerAdapter {
 
-  public void connect(int port, String host) throws Exception {
 
-  }
 
 }
 
