@@ -7,7 +7,14 @@ import io.netty.handler.codec.http.FullHttpRequest;
 /**
  * Created by YH on 2017-01-04.
  */
-public class FileServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
+public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
+
+  private final String url;
+
+  public HttpFileServerHandler(String url) {
+    this.url = url;
+  }
+
   @Override protected void messageReceived(ChannelHandlerContext ctx, FullHttpRequest msg) throws Exception {
 
   }
