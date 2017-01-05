@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://www.sync.sz/netty/protocol/http/xml/pojo"
     elementFormDefault="qualified">
+
   <xs:element name="order" type="order"/>
 
   <xs:complexType name="order">
@@ -17,7 +17,7 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="billTo" minOccurs="0" type="address"/>
-      <xs:element name="shopping" minOccurs="0">
+      <xs:element name="shipping" minOccurs="0">
         <xs:simpleType>
           <xs:restriction base="xs:string">
             <xs:enumeration value="STANDARD_MAIL"/>
