@@ -1,15 +1,39 @@
 package com.sync.sz.netty.protocol.file;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.DefaultFileRegion;
+import io.netty.channel.FileRegion;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.FullHttpRequest;
+import java.io.File;
+import java.io.RandomAccessFile;
 
 /**
  * Created by YH on 2017-01-04.
  */
-public class FileServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
-  @Override protected void messageReceived(ChannelHandlerContext ctx, FullHttpRequest msg) throws Exception {
+public class FileServerHandler extends SimpleChannelInboundHandler<String> {
 
+  private static final String CR = System.getProperty("line.separator");
+
+  @Override protected void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
+    File file = new File(msg);
+    if (file.exists()) {
+      if (!file.isFile()) {
+        ctx.writeAndFlush("Not a file : " + file + CR);
+        return;
+      }
+      ctx.write(file + " " + file.length() + CR);
+      RandomAccessFile randomAccessFile = new RandomAccessFile(msg, "r");
+      FileRegion region = new DefaultFileRegion(randomAccessFile.getChannel(), 0, randomAccessFile.length());
+      ctx.write(region);
+      ctx.writeAndFlush(CR);
+      randomAccessFile.close();
+    } else {
+      ctx.writeAndFlush("File not fount : " + file + CR);
+    }
+  }
+
+  @Override public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    cause.printStackTrace();
+    ctx.close();
   }
 }

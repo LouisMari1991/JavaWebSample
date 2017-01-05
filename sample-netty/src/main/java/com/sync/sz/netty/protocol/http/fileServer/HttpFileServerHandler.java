@@ -2,18 +2,27 @@ package com.sync.sz.netty.protocol.http.fileServer;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelProgressiveFuture;
+import io.netty.channel.ChannelProgressiveFutureListener;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.DefaultHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpHeaders;
+import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponse;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
+import io.netty.handler.codec.http.LastHttpContent;
+import io.netty.handler.stream.ChunkedFile;
 import io.netty.util.CharsetUtil;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.regex.Pattern;
@@ -32,7 +41,71 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
 
   @Override protected void messageReceived(ChannelHandlerContext ctx, FullHttpRequest msg) throws Exception {
     if (!msg.getDecoderResult().isSuccess()) {
+      sendError(ctx, HttpResponseStatus.BAD_REQUEST);
+      return;
+    }
+    if (msg.getMethod() != HttpMethod.GET) {
+      sendError(ctx, HttpResponseStatus.METHOD_NOT_ALLOWED);
+      return;
+    }
+    final String uri = msg.getUri();
+    final String path = sanitizeUri(uri);
+    if (path == null) {
+      sendError(ctx, HttpResponseStatus.FORBIDDEN);
+      return;
+    }
+    File file = new File(path);
+    if (file.isHidden() || !file.exists()) {
+      sendError(ctx, HttpResponseStatus.NOT_FOUND);
+      return;
+    }
+    if (file.isDirectory()) {
+      if (uri.endsWith("/")) {
+        sendListing(ctx, file);
+      } else {
+        sendRedirect(ctx, uri + '/');
+      }
+      return;
+    }
+    if (!file.isFile()) {
+      sendError(ctx, HttpResponseStatus.FORBIDDEN);
+      return;
+    }
+    RandomAccessFile randomAccessFile = null;
+    try {
+      randomAccessFile = new RandomAccessFile(file, "r");
+    } catch (FileNotFoundException e) {
+      sendError(ctx, HttpResponseStatus.NOT_FOUND);
+      return;
+    }
+    long fileLength = randomAccessFile.length();
+    HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+    HttpHeaders.setContentLength(response, fileLength);
+    setContentTypeHeader(response, file);
+    if (HttpHeaders.isKeepAlive(msg)) {
+      response.headers().set(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.KEEP_ALIVE);
+    }
+    ctx.write(response);
+    ChannelFuture sendFileFuture;
+    sendFileFuture = ctx.write(new ChunkedFile(randomAccessFile, 0, fileLength, 8192), ctx.newProgressivePromise());
+    sendFileFuture.addListener(new ChannelProgressiveFutureListener() {
 
+      @Override public void operationComplete(ChannelProgressiveFuture future) throws Exception {
+        System.out.println("Transfer complete");
+      }
+
+      @Override public void operationProgressed(ChannelProgressiveFuture future, long progress, long total)
+          throws Exception {
+        if (total < 0) { // total unknown
+          System.err.println("Transfer progress: " + progress);
+        } else {
+          System.err.println("Transfer progress: " + progress + " / " + total);
+        }
+      }
+    });
+    ChannelFuture lastContentFuture = ctx.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
+    if (!HttpHeaders.isKeepAlive(msg)) {
+      lastContentFuture.addListener(ChannelFutureListener.CLOSE);
     }
   }
 
@@ -120,7 +193,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
     ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
   }
 
-  private static void sendContentTypeHeader(HttpResponse response, File file) {
+  private static void setContentTypeHeader(HttpResponse response, File file) {
     MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
     response.headers().set(HttpHeaders.Names.CONTENT_TYPE, mimeTypesMap.getContentType(file.getPath()));
   }

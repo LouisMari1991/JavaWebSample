@@ -13,9 +13,8 @@ public class HttpFileServerHandlerTest {
   @Test
   public void test1() {
     System.out.println(System.getProperty("user.dir"));
+    System.out.println(System.getProperty("line.separator"));
     System.out.println(File.separator);
     System.out.println(File.separatorChar);
   }
-
-
 }
