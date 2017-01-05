@@ -10,6 +10,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import java.net.InetAddress;
 
@@ -18,7 +20,7 @@ import java.net.InetAddress;
  */
 public class HttpFileServer {
 
-  private static final String DEFAULT_URL = "/src/main/java/com/sync/sz/netty/";
+  private static final String DEFAULT_URL = "/sample-netty/src/main/java/com/sync/sz/netty/";
 
   public void run(final int port, final String url) throws Exception {
     EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -27,6 +29,7 @@ public class HttpFileServer {
       ServerBootstrap b = new ServerBootstrap();
       b.group(bossGroup, workerGroup)
           .channel(NioServerSocketChannel.class)
+          .handler(new LoggingHandler(LogLevel.INFO))
           .childHandler(new ChannelInitializer<SocketChannel>() {
             @Override protected void initChannel(SocketChannel ch) throws Exception {
               ch.pipeline().addLast("http-decoder", new HttpRequestDecoder());

@@ -14,6 +14,7 @@
             <xs:element name="lastName" minOccurs="0" type="xs:string"/>
             <xs:element name="middleName" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
           </xs:sequence>
+          <xs:attribute name="customerNumber" use="required" type="xs:long"/>
         </xs:complexType>
       </xs:element>
       <xs:element name="billTo" minOccurs="0" type="address"/>

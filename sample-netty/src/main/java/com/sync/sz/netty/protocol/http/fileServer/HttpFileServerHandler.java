@@ -59,6 +59,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
       sendError(ctx, HttpResponseStatus.NOT_FOUND);
       return;
     }
+    System.out.println(uri);
     if (file.isDirectory()) {
       if (uri.endsWith("/")) {
         sendListing(ctx, file);
@@ -97,9 +98,9 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
       @Override public void operationProgressed(ChannelProgressiveFuture future, long progress, long total)
           throws Exception {
         if (total < 0) { // total unknown
-          System.err.println("Transfer progress: " + progress);
+          System.out.println("Transfer progress: " + progress);
         } else {
-          System.err.println("Transfer progress: " + progress + " / " + total);
+          System.out.println("Transfer progress: " + progress + " / " + total);
         }
       }
     });
@@ -111,7 +112,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
 
   @Override public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
     cause.printStackTrace();
-    if (ctx.channel().isActive()) {
+    if (!ctx.channel().isActive()) {
       sendError(ctx, HttpResponseStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -139,7 +140,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         || uri.endsWith(".") || INSECURE_URI.matcher(uri).matches()) {
       return null;
     }
-    return System.getProperty("user.dir") + File.separator + uri;
+    return System.getProperty("user.dir") + uri;
   }
 
   private static final Pattern ALLOWED_FILE_NAME = Pattern.compile("[A-Za-z0-9][-_A-Za-z0-9\\\\.]*");
@@ -158,7 +159,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
     buf.append(dirPath).append(" 目录: ");
     buf.append("</h3>\r\n");
     buf.append("<ul>");
-    buf.append("<li>链接：<a href=\"../\">..</a><li>\r\n");
+    buf.append("<li>链接：<a href=\"../\">..</a></li>\r\n");
     for (File f : dir.listFiles()) {
       if (f.isHidden() || !f.canRead()) {
         continue;
