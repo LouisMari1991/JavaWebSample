@@ -3,6 +3,46 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://www.sync.sz/netty/protocol/http/xml/pojo"
     elementFormDefault="qualified">
+  <xs:element name="order" type="order"/>
 
+  <xs:complexType name="order">
+    <xs:sequence>
+      <xs:element name="customer" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="firstName" minOccurs="0" type="xs:string"/>
+            <xs:element name="lastName" minOccurs="0" type="xs:string"/>
+            <xs:element name="middleName" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="billTo" minOccurs="0" type="address"/>
+      <xs:element name="shopping" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="STANDARD_MAIL"/>
+            <xs:enumeration value="PRIORITY_MAIL"/>
+            <xs:enumeration value="INTERNATIONAL_MAIL"/>
+            <xs:enumeration value="DOMESTIC_EXPRESS"/>
+            <xs:enumeration value="INTERNATIONAL_EXPRESS"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="shipTo" type="address" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="orderNumber" use="required" type="xs:long"/>
+    <xs:attribute name="total" type="xs:float"/>
+  </xs:complexType>
+
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element name="street1" minOccurs="0" type="xs:string"/>
+      <xs:element name="street2" minOccurs="0" type="xs:string"/>
+      <xs:element name="city" minOccurs="0" type="xs:string"/>
+      <xs:element name="state" minOccurs="0" type="xs:string"/>
+      <xs:element name="postCode" minOccurs="0" type="xs:string"/>
+      <xs:element name="country" minOccurs="0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
 
 </xs:schema>
