@@ -1,18 +1,20 @@
-package com.sync.sz.netty.protocol.http.xml;
+package com.sync.sz.netty.protocol.http.xml.pojo;
 
-import com.sync.sz.netty.protocol.http.xml.pojo.Order;
-import com.sync.sz.netty.protocol.http.xml.pojo.OrderFactory;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IMarshallingContext;
 import org.jibx.runtime.IUnmarshallingContext;
 import org.jibx.runtime.JiBXException;
 
-public class TestOrder {
+
+/**
+ * Created by YH on 2017-01-06.
+ */
+public class OrderTest {
+
 
   private IBindingFactory factory = null;
   private StringWriter writer = null;
@@ -39,10 +41,12 @@ public class TestOrder {
   }
 
   public static void main(String[] args) throws JiBXException, IOException {
-    TestOrder test = new TestOrder();
+    OrderTest test = new OrderTest();
     Order order = OrderFactory.create(123);
     String body = test.encode2Xml(order);
     Order order2 = test.decode2Order(body);
     System.out.println(order2);
   }
+
+
 }
