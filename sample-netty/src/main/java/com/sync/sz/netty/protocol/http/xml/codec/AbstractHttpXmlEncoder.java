@@ -9,7 +9,6 @@ import java.nio.charset.Charset;
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IMarshallingContext;
-import org.jibx.runtime.JiBXException;
 
 /**
  * Created by Administrator on 2017/1/7 0007.
