@@ -29,9 +29,8 @@ public class WebSocketServer {
               ChannelPipeline pipeline = ch.pipeline();
               pipeline.addLast("http-codec", new HttpServerCodec());
               pipeline.addLast("aggregator", new HttpObjectAggregator(65536));
-              ch.pipeline().addLast("http-chunked", new ChunkedWriteHandler());
-              //pipeline.addLast("handler",
-              //    new WebSocketServerHandler());
+              pipeline.addLast("http-chunked", new ChunkedWriteHandler());
+              pipeline.addLast("handler", new WebSocketServerHandler());
             }
           });
       Channel ch = b.bind(port).sync().channel();
@@ -41,5 +40,9 @@ public class WebSocketServer {
       bossGroup.shutdownGracefully();
       workerGroup.shutdownGracefully();
     }
+  }
+
+  public static void main(String[] args) {
+    int port = 8080;
   }
 }
