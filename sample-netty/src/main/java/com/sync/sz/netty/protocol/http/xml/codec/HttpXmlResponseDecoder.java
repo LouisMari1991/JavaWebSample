@@ -8,11 +8,11 @@ import java.util.List;
  * Created by Administrator on 2017/1/7 0007.
  */
 public class HttpXmlResponseDecoder extends AbstractHttpXmlDecoder<DefaultFullHttpResponse> {
-  protected HttpXmlResponseDecoder(Class<?> clazz) {
+  public HttpXmlResponseDecoder(Class<?> clazz) {
     super(clazz);
   }
 
-  protected HttpXmlResponseDecoder(Class<?> clazz, boolean isPrint) {
+  public HttpXmlResponseDecoder(Class<?> clazz, boolean isPrint) {
     super(clazz, isPrint);
   }
 

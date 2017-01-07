@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class HttpXmlRequestDecoder extends AbstractHttpXmlDecoder<FullHttpRequest> {
 
-  protected HttpXmlRequestDecoder(Class<?> clazz) {
+  public HttpXmlRequestDecoder(Class<?> clazz) {
     super(clazz);
   }
 

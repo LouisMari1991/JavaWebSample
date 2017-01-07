@@ -2,6 +2,7 @@ package com.sync.sz.netty.protocol.http.xml.client;
 
 import com.sync.sz.netty.protocol.http.xml.codec.HttpXmlRequestDecoder;
 import com.sync.sz.netty.protocol.http.xml.codec.HttpXmlRequestEncoder;
+import com.sync.sz.netty.protocol.http.xml.codec.HttpXmlResponseDecoder;
 import com.sync.sz.netty.protocol.http.xml.pojo.Order;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -14,6 +15,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpRequestEncoder;
+import io.netty.handler.codec.http.HttpResponseDecoder;
 import java.net.InetSocketAddress;
 
 /**
@@ -30,9 +32,10 @@ public class HttpXmlClient {
             @Override protected void initChannel(SocketChannel ch) throws Exception {
               ch.pipeline().addLast("http-decoder", new HttpRequestDecoder());
               ch.pipeline().addLast("http-aggregator", new HttpObjectAggregator(65536));
-              ch.pipeline().addLast("xml-decoder", new HttpXmlRequestDecoder(Order.class, true));
+              ch.pipeline().addLast("xml-decoder", new HttpXmlResponseDecoder(Order.class, true));
               ch.pipeline().addLast("http-encoder", new HttpRequestEncoder());
               ch.pipeline().addLast("xml-encoder", new HttpXmlRequestEncoder());
+              ch.pipeline().addLast("xmlClientHandler", new HttpXmlClientHandler());
             }
           });
       ChannelFuture f = b.connect(new InetSocketAddress(port)).sync();
