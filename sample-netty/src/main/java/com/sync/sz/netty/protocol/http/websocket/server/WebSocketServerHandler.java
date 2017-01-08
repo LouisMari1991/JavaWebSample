@@ -14,6 +14,7 @@ import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.handler.codec.http.websocketx.CloseWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.PingWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.PongWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
@@ -58,13 +59,21 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
   }
 
   private void handleWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
+    // 判断是否关闭链路指令
     if (frame instanceof CloseWebSocketFrame) {
+      handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
+      return;
+    }
+    // 判断是否是Ping消息
+    if (frame instanceof PingWebSocketFrame) {
       ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
       return;
     }
+    // 仅支持文本消息，不支持二进制消息
     if (!(frame instanceof TextWebSocketFrame)) {
       throw new UnsupportedMessageTypeException(String.format("%s frame types not supported", frame.getClass().getName()));
     }
+    // 返回应答消息
     String request = ((TextWebSocketFrame) frame).text();
     if (logger.isLoggable(Level.FINE)) {
       logger.fine(String.format("%s received %s", ctx.channel(), request));
@@ -73,13 +82,15 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
   }
 
   private static void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res) {
+    // 返回应答客户端
     if (res.getStatus().code() != 200) {
       ByteBuf buf = Unpooled.copiedBuffer(res.getStatus().toString(), CharsetUtil.UTF_8);
       res.content().writeBytes(buf);
       buf.release();
       HttpHeaders.setContentLength(res, res.content().readableBytes());
     }
-    ChannelFuture f = ctx.channel().write(res);
+    // 如果是非Keep-Alive,关闭消息
+    ChannelFuture f = ctx.channel().writeAndFlush(res);
     if (!HttpHeaders.isKeepAlive(req) || res.getStatus().code() != 200) {
       f.addListener(ChannelFutureListener.CLOSE);
     }
