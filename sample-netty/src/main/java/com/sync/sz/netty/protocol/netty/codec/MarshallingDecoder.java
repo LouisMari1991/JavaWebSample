@@ -20,7 +20,7 @@ public class MarshallingDecoder {
   protected Object decode(ByteBuf in) throws Exception {
     int objectSize = in.readInt();
     ByteBuf buf = in.slice(in.readerIndex(), objectSize);
-    //ByteInput input = new ChannelBufferByteInput(buf);
+    ByteInput input = new ChannelBufferByteInput(buf);
     return null;
   }
 }
