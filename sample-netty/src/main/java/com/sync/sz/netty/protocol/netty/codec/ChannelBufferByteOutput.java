@@ -16,22 +16,26 @@ public class ChannelBufferByteOutput implements ByteOutput {
   }
 
   @Override public void write(int b) throws IOException {
-
+    buffer.writeByte(b);
   }
 
   @Override public void write(byte[] b) throws IOException {
-
+    buffer.writeBytes(b);
   }
 
   @Override public void write(byte[] b, int off, int len) throws IOException {
-
+    buffer.writeBytes(b, off, len);
   }
 
   @Override public void close() throws IOException {
-
+    // nothing to do
   }
 
   @Override public void flush() throws IOException {
+    // nothing to do
+  }
 
+  ByteBuf getBuffer() {
+    return buffer;
   }
 }

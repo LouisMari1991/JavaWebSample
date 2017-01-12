@@ -1,6 +1,7 @@
 package com.sync.sz.netty.protocol.netty.codec;
 
 import io.netty.buffer.ByteBuf;
+import java.io.IOException;
 import org.jboss.marshalling.Marshaller;
 
 /**
@@ -11,7 +12,7 @@ public class MarshallingEncoder {
   private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
   private final Marshaller marshaller;
 
-  public MarshallingEncoder() throws Exception {
+  public MarshallingEncoder() throws IOException {
     this.marshaller = MarshallingCodecFactory.buildMarshalling();
   }
 
