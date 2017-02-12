@@ -1,4 +1,4 @@
-package com.sync.sz.netty.protocol.http.websocket.server;
+package com.sync.sz.netty.protocol.websocket.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
