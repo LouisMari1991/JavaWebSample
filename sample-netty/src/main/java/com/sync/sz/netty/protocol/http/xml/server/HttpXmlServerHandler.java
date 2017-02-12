@@ -26,7 +26,7 @@ import org.omg.CORBA.INTERNAL;
  * Created by Administrator on 2017/1/7 0007.
  */
 public class HttpXmlServerHandler extends SimpleChannelInboundHandler<HttpXmlRequest> {
-  @Override protected void messageReceived(ChannelHandlerContext ctx, HttpXmlRequest msg) throws Exception {
+  @Override protected void messageReceived(final ChannelHandlerContext ctx, HttpXmlRequest msg) throws Exception {
     HttpRequest request = msg.getRequest();
     Order order = (Order) msg.getBody();
     System.out.println("Http server receiver request : " + order);

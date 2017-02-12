@@ -24,27 +24,22 @@ public class NettyServer {
   public void bind() throws Exception {
     EventLoopGroup bossGroup = new NioEventLoopGroup();
     EventLoopGroup workerGroup = new NioEventLoopGroup();
-    try {
-      ServerBootstrap b = new ServerBootstrap();
-      b.group(bossGroup, workerGroup)
-          .channel(NioServerSocketChannel.class)
-          .option(ChannelOption.SO_BACKLOG, 100)
-          .handler(new LoggingHandler(LogLevel.INFO))
-          .childHandler(new ChannelInitializer<SocketChannel>() {
-            @Override protected void initChannel(SocketChannel ch) throws Exception {
-              ch.pipeline().addLast(new NettyMessageDecoder(1024 * 1024, 4, 4));
-              ch.pipeline().addLast(new NettyMessageEncoder());
-              ch.pipeline().addLast("readTimeoutHandler", new ReadTimeoutHandler(50));
-              ch.pipeline().addLast(new LoginAuthRespHandler());
-              ch.pipeline().addLast("HeartBeatHandler", new HeartBeatReqHandler());
-            }
-          });
-      b.bind(NettyConstant.REMOTEIP, NettyConstant.PORT).sync();
-      System.out.println("Netty server start ok : " + (NettyConstant.REMOTEIP + " : " + NettyConstant.PORT));
-    } finally {
-      bossGroup.shutdownGracefully();
-      workerGroup.shutdownGracefully();
-    }
+    ServerBootstrap b = new ServerBootstrap();
+    b.group(bossGroup, workerGroup)
+        .channel(NioServerSocketChannel.class)
+        .option(ChannelOption.SO_BACKLOG, 100)
+        .handler(new LoggingHandler(LogLevel.INFO))
+        .childHandler(new ChannelInitializer<SocketChannel>() {
+          @Override protected void initChannel(SocketChannel ch) throws Exception {
+            ch.pipeline().addLast(new NettyMessageDecoder(1024 * 1024, 4, 4));
+            ch.pipeline().addLast(new NettyMessageEncoder());
+            ch.pipeline().addLast("readTimeoutHandler", new ReadTimeoutHandler(50));
+            ch.pipeline().addLast(new LoginAuthRespHandler());
+            ch.pipeline().addLast("HeartBeatHandler", new HeartBeatReqHandler());
+          }
+        });
+    b.bind(NettyConstant.REMOTEIP, NettyConstant.PORT).sync();
+    System.out.println("Netty server start ok : " + (NettyConstant.REMOTEIP + " : " + NettyConstant.PORT));
   }
 
   public static void main(String[] args) throws Exception {
