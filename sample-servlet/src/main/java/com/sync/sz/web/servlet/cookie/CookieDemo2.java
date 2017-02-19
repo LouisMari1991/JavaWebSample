@@ -50,7 +50,7 @@ public class CookieDemo2 extends HttpServlet {
 }
 
 class Db {
-  private static Map<String, Book> map = new LinkedHashMap<String, Book>();
+  private static Map<String, Book> map = new LinkedHashMap<>();
 
   static {
     map.put("1", new Book("1", "Java Web", "sync", "gook book!"));
