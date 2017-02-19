@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="WebApp_ID" version="3.0">
 
   <welcome-file-list>
     <welcome-file>jsp/index.jsp</welcome-file>
@@ -136,6 +137,21 @@
     <servlet-class>com.sync.sz.web.servlet.form.DoFormServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>FormServlet</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.form.FormServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ImageServlet</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.checkcode.ImageServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.sync.sz.web.servlet.checkcode.RegisterServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
     <url-pattern>/WelcomeServlet</url-pattern>
@@ -247,6 +263,21 @@
   <servlet-mapping>
     <servlet-name>DoFromServlet</servlet-name>
     <url-pattern>/DoFromServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FormServlet</servlet-name>
+    <url-pattern>/FormServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/ImageServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
