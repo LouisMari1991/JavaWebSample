@@ -31,3 +31,10 @@ JSP2.0规范定义的page指令的完整语法：<br/>
 7. Out
 8. Exception
 9. pageContext
+
+JSP中使用JavaBen：<br/>
+　　JSP技术提供了三个关于JavaBean组件的动作元素，即JSP标签，他们分别为:
+
+1. `<jsp:useBean>` 标签：用于在JSP页面中查找或实例化一个  JavaBean 组件。<br/>
+2. `<jsp:setProperty>` 标签：用于在JSP页面中设置一个 JavaBean 组件的属性。<br/>
+3. `<jsp:getProperty>` 标签：用于在JSP页面中获取一个 JavaBean 组件的属性。
