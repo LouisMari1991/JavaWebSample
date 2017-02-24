@@ -4,7 +4,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -60,10 +59,10 @@
 </c:if>
 
 <%--代表用户没登陆--%>
-<C:if test="${user==null}">
+<c:if test="${user==null}">
     用户名:<input type="text"/>
     密码:<input type="text"/>
-</C:if>
+</c:if>
 
 
 </body>
