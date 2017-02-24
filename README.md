@@ -9,3 +9,7 @@
 [jsp.md](https://github.com/MariShunxiang/JavaWebSample/blob/master/jsp.md)
 
 [环境.md](https://github.com/MariShunxiang/JavaWebSample/blob/master/%E7%8E%AF%E5%A2%83.md)
+
+[xml.md](https://github.com/MariShunxiang/JdbcSample/blob/master/xml.md)
+
+[Schema.md](https://github.com/MariShunxiang/JdbcSample/blob/master/Schema.md)
