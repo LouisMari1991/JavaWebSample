@@ -1,5 +1,6 @@
 package com.sync.sz.sample.dao.impl;
 
+import com.sync.sz.sample.dao.UserDao;
 import com.sync.sz.sample.domain.User;
 import com.sync.sz.sample.utils.XmlUtils;
 import java.text.SimpleDateFormat;
@@ -9,9 +10,9 @@ import org.dom4j.Element;
 /**
  * Created by Administrator on 2017/2/24 0024.
  */
-public class UserDaoImpl {
+public class UserDaoImpl implements UserDao {
 
-  public void add(User user) {
+  @Override public void add(User user) {
 
     try {
       Document document = XmlUtils.getDocument();
@@ -34,7 +35,7 @@ public class UserDaoImpl {
   /**
    * 登录
    */
-  public User find(String username, String password) {
+  @Override public User find(String username, String password) {
     try {
       Document document = XmlUtils.getDocument();
       Element e = (Element) document.selectSingleNode("//user[@username='" + username + "' and @password='" + password + "']");
@@ -63,7 +64,7 @@ public class UserDaoImpl {
   /**
    * 用户是否存在
    */
-  public boolean find(String username) {
+  @Override public boolean find(String username) {
     try {
 
       Document document = XmlUtils.getDocument();
