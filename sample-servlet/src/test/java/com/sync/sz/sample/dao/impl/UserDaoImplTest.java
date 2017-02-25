@@ -27,11 +27,12 @@ public class UserDaoImplTest {
   @Test
   public void find() throws Exception {
     UserDaoImpl dao = new UserDaoImpl();
-    System.out.println(dao.find("aaa","123"));
+    System.out.println(dao.find("aaa", "123"));
   }
 
   @Test
   public void find1() throws Exception {
-
+    UserDaoImpl dao = new UserDaoImpl();
+    System.out.println(dao.find("bbb"));
   }
 }
