@@ -26,7 +26,8 @@ public class UserDaoImplTest {
 
   @Test
   public void find() throws Exception {
-
+    UserDaoImpl dao = new UserDaoImpl();
+    System.out.println(dao.find("aaa","123"));
   }
 
   @Test
