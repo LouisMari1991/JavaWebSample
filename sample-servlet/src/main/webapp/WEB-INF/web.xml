@@ -169,6 +169,10 @@
     <servlet-name>sample/LoginServlet</servlet-name>
     <servlet-class>com.sync.sz.sample.web.controller.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>sample/LogoutServlet</servlet-name>
+    <servlet-class>com.sync.sz.sample.web.controller.LogoutServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
@@ -316,6 +320,10 @@
   <servlet-mapping>
     <servlet-name>sample/LoginServlet</servlet-name>
     <url-pattern>/sample/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>sample/LogoutServlet</servlet-name>
+    <url-pattern>/sample/LogoutServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

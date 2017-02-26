@@ -18,7 +18,7 @@
 <br/>
 <div>
     <c:if test="${user!=null}">
-        欢迎您: ${user.username} <a href="">注销</a>
+        欢迎您: ${user.username} <a href="/sample/LogoutServlet">注销</a>
     </c:if>
     <c:if test="${user==null}">
         <a href="RegisterUIServlet">注册</a>
