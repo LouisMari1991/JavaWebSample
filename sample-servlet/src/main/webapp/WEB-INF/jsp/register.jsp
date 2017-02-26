@@ -66,12 +66,12 @@
         <div id="form">
             <form method="post" action="/sample/RegisterServlet">
                 <div id="input">
-                    <div>登录帐号:<input type="text" name="username"/><br/></div>
-                    <div> 登录密码:<input type="password" name="password"/><br/></div>
-                    <div> 确认密码:<input type="password" name="checkPassword"/><br/></div>
-                    <div>电子邮箱:<input type="email" name="email"/><br/></div>
-                    <div>生日:<input type="date" name="birthday"/><br/></div>
-                    <div>您的昵称:<input type="text" name="nickname"/><br/></div>
+                    <div>登录帐号:<input type="text" name="username" value="${form.username}"/> <span>${form.errors.username}</span><br/></div>
+                    <div> 登录密码:<input type="password" name="password" value="${form.password}"/><span>${form.errors.password}</span><br/></div>
+                    <div> 确认密码:<input type="password" name="password2" value="${form.password2}"/><span>${form.errors.password2}</span><br/></div>
+                    <div>电子邮箱:<input type="email" name="email" value="${form.email}"/><span>${form.errors.email}</span><br/></div>
+                    <div>生日:<input type="date" name="birthday" value="${form.birthday}"/><span>${form.errors.birthday}</span><br/></div>
+                    <div>您的昵称:<input type="text" name="nickname" value="${form.nickname}"/><span>${form.errors.nickname}</span><br/></div>
                     <div>图片认证:<input type="text" name="img"/><br/></div>
                 </div>
                 <div id="btn">

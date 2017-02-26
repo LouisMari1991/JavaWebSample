@@ -103,7 +103,7 @@ public class RegisterForm {
     if (password2 == null || password2.trim().equals("")) {
       isOK = false;
       errors.put("password2", "确认密码不能为空!!");
-    } else if (password.equals(password2)) {
+    } else if (!password.equals(password2)) {
       isOK = false;
       errors.put("password2", "两次密码要一致!!");
     }
@@ -129,7 +129,7 @@ public class RegisterForm {
     if (nickname == null || nickname.trim().equals("")) {
       isOK = false;
       errors.put("nickname", "昵称不能为空!!");
-    } else if (nickname.matches("[\u4e00-\u9fa5]+")) {
+    } else if (!nickname.matches("^([\u4e00-\u9fa5]+)$")) {
       isOK = false;
       errors.put("nickname", "昵称必须是汉字!!");
     }

@@ -4,7 +4,7 @@
     id="WebApp_ID" version="3.0">
 
   <welcome-file-list>
-    <welcome-file>jsp/index.jsp</welcome-file>
+    <welcome-file>/sample/index.jsp</welcome-file>
   </welcome-file-list>
 
   <session-config>
@@ -161,6 +161,14 @@
     <servlet-name>sample/RegisterUIServlet</servlet-name>
     <servlet-class>com.sync.sz.sample.web.UI.RegisterUIServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>sample/LoginUIServlet</servlet-name>
+    <servlet-class>com.sync.sz.sample.web.UI.LoginUIServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>sample/LoginServlet</servlet-name>
+    <servlet-class>com.sync.sz.sample.web.controller.LoginServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
@@ -298,6 +306,16 @@
   <servlet-mapping>
     <servlet-name>sample/RegisterServlet</servlet-name>
     <url-pattern>/sample/RegisterServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>sample/LoginUIServlet</servlet-name>
+    <url-pattern>/sample/LoginUIServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>sample/LoginServlet</servlet-name>
+    <url-pattern>/sample/LoginServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
