@@ -24,7 +24,7 @@ in JNDI.
   <session-factory>
     <!--第一部分，配置数据库信息 必须的-->
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql:///sample-hibernate</property>
+    <property name="hibernate.connection.url">jdbc:mysql:///sample_hibernate?useUnicode=true&amp;characterEncoding=UTF8</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
 
@@ -46,7 +46,7 @@ in JNDI.
 
 
     <!--第三部分，把映射文件放到核心配置文件中 必须的-->
-    <mapping resource="com/sync/sz/hibernate/entity/User.hbm.xml"/>
+    <mapping resource="User.hbm.xml"/>
 
   </session-factory>
 </hibernate-configuration>
