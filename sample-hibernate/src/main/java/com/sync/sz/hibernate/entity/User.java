@@ -5,16 +5,16 @@ package com.sync.sz.hibernate.entity;
  */
 public class User {
 
-  private int uid;
+  private Integer uid;
   private String username;
   private String password;
   private String address;
 
-  public int getUid() {
+  public Integer getUid() {
     return uid;
   }
 
-  public void setUid(int uid) {
+  public void setUid(Integer uid) {
     this.uid = uid;
   }
 
@@ -40,5 +40,14 @@ public class User {
 
   public void setAddress(String address) {
     this.address = address;
+  }
+
+  @Override public String toString() {
+    return "User{" +
+        "uid=" + uid +
+        ", username='" + username + '\'' +
+        ", password='" + password + '\'' +
+        ", address='" + address + '\'' +
+        '}';
   }
 }
