@@ -1,5 +1,6 @@
 package com.sync.sz.hibernate.utils;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -16,6 +17,11 @@ public class HibernateUtils {
     cfg = new Configuration().configure();
     cfg.configure();
     sessionFactory = cfg.buildSessionFactory();
+  }
+
+  // 返回与本地线程绑定的session方法
+  public static Session getSessionObject() {
+    return sessionFactory.getCurrentSession();
   }
 
   public static SessionFactory getSessionFactory() {

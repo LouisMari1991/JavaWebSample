@@ -44,6 +44,9 @@ in JNDI.
     -->
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
+    <!-- 配置session绑定本地线程 -->
+    <property name="hibernate.current_session_context_class">thread</property>
+
 
     <!--第三部分，把映射文件放到核心配置文件中 必须的-->
     <mapping resource="User.hbm.xml"/>
