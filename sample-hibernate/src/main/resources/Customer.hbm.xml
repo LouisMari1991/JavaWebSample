@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+
+<!-- Hibernate Mapping DTD.
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+An instance of this XML document may contain mappings for an arbitrary
+number of classes. The class mappings may contain associations to classes
+mapped in the same document or in another document. No class may be
+mapped more than once. Each document may also contain definitions of an
+arbitrary number of queries, and import declarations of arbitrary classes.
+
+-->
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <!-- 1. 配置类和表对应
+    class标签
+    name属性：实体类全路径
+    table属性：数据库表名称
+  -->
+  <class name="com.sync.sz.hibernate.entity.Customer" table="t_customer">
+    <!-- 2.配置实体类id和表id对应
+      hibernate要求实体类有一个属性唯一值
+      hibernate要求表有字段作为唯一值
+    -->
+    <!-- id标签
+      name属性：实体类里面id属性名称
+      column属性：生成表字段名称
+    -->
+    <id name="cid" column="cid">
+      <!-- 设置数据库id增长策略
+        native：生成的表id值就是自动增长
+      -->
+      <generator class="native"/>
+    </id>
+    <!-- 配置其他的属性和表字段对应
+      name属性：实体类属性名称
+      column属性：生成表字段名称
+    -->
+    <property name="custName" column="custName"></property>
+    <property name="custLevel" column="custLevel"></property>
+    <property name="custSource" column="custSource"></property>
+    <property name="custPhone" column="custPhone"></property>
+    <property name="custMobile" column="custMobile"></property>
+
+    <!-- 在客户映射文件中，表示所有联系人
+      使用set标签表示所有联系人
+      set标签里面name属性，
+        属性值写在客户实体类里面表示联系人的set集合名称
+    -->
+    <set name="setLinkMan">
+      <!-- 一对多建表，有外键
+          hibernate机制:双向维护外键，在一和多那一方都位置外键
+            column属性值，表示外键名称
+       -->
+      <key column="clid"></key>
+      <!-- 客户所有的联系人，class写联系人实体类全路径 -->
+      <one-to-many class="com.sync.sz.hibernate.entity.LinkMan"/>
+    </set>
+
+  </class>
+
+</hibernate-mapping>
