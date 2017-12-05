@@ -2,6 +2,8 @@ package com.sync.changsha.gson;
 
 import com.sync.changsha.Utils.GsonHelper;
 import com.sync.changsha.gson.bean.MockBean;
+import com.sync.sz.core.common.utils.JsonUtil;
+import java.io.IOException;
 import org.junit.Test;
 
 /**
@@ -42,6 +44,21 @@ public class GsonTest {
     MockBean mockBean = (MockBean) o;
 
     System.out.println(mockBean);
+  }
+
+  @Test
+  public void jacksonTest() {
+    String jsonStr = "{\"nick\":\"20\",\"phone\":\"18664569168\",\"name\":\"李四\",\"age\":\"18\"}";
+    try {
+      Object o = JsonUtil.jsonToObject(jsonStr);
+      System.out.printf(o.toString());
+
+      MockBean mockBean = (MockBean) o;
+
+      System.out.println(mockBean);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

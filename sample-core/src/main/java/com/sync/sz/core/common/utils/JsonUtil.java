@@ -18,7 +18,7 @@ import java.io.InputStream;
  */
 public class JsonUtil {
 
-  public static final ICodec INSTANCE = new JsonCodec();
+  private static final ICodec INSTANCE = new JsonCodec();
 
   public static <T> T jsonToObject(byte[] json) throws JsonParseException, JsonMappingException,
       IOException {
