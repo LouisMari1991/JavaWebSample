@@ -1,9 +1,11 @@
 package com.sync.changsha.gson;
 
+import com.alibaba.fastjson.JSON;
 import com.sync.changsha.Utils.GsonHelper;
 import com.sync.changsha.gson.bean.MockBean;
 import com.sync.sz.core.common.utils.JsonUtil;
 import java.io.IOException;
+import java.util.Map;
 import org.junit.Test;
 
 /**
@@ -11,6 +13,7 @@ import org.junit.Test;
  */
 public class GsonTest {
 
+  @Test
   public void testCastObject() {
 
     //Map<String, Object> map = new HashMap<>();
@@ -21,16 +24,40 @@ public class GsonTest {
 
     //String jsonStr = GsonHelper.object2JsonStr(map);
 
-    String jsonStr = "{\"nick\":\"20\",\"phone\":\"18664569168\",\"name\":\"李四\",\"age\":\"18\"}";
+    //String jsonStr = "{\"nick\":\"20\",\"phone\":\"18664569168\",\"name\":\"李四\",\"age\":\"18\"}";
+    //
+    //System.out.println(jsonStr);
+    //
+    //Object o = GsonHelper.convertEntity(jsonStr, Object.class);
+    //System.out.println(o);
+    //
+    //MockBean mockBean = (MockBean) o;
+    //
+    //System.out.println(mockBean);
 
-    System.out.println(jsonStr);
+    String json = "{   \"data\": {"
+        + "        \"momeyTotal\": 0,"
+        + "        \"volunteerTotal\": 0,"
+        + "        \"volunteerMap\": null,"
+        + "        \"gainTotal\": 0,"
+        + "        \"activityTotal\": 0,"
+        + "        \"publishTotal\": 0"
+        + "    },"
+        + "    \"msg\": \"\","
+        + "    \"pages\": 0,"
+        + "    \"status\": 200,"
+        + "    \"total\": 0"
+        + "}";
 
-    Object o = GsonHelper.convertEntity(jsonStr, Object.class);
-    System.out.println(o);
+    System.out.println(json);
 
-    MockBean mockBean = (MockBean) o;
+    System.out.println(JSON.parseObject(json));
 
-    System.out.println(mockBean);
+    Map map = GsonHelper.convertEntity(json,Map.class);
+
+    System.out.println(map);
+
+    System.out.println(map.get("volunteerMap"));
   }
 
   public static void main(String[] args) {
@@ -60,5 +87,4 @@ public class GsonTest {
       e.printStackTrace();
     }
   }
-
 }
