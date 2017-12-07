@@ -2,7 +2,10 @@ package com.sync.changsha.gson;
 
 import com.alibaba.fastjson.JSON;
 import com.sync.changsha.Utils.GsonHelper;
+import com.sync.changsha.gson.bean.MapBean;
+import com.sync.changsha.gson.bean.MapBeanWrapper;
 import com.sync.changsha.gson.bean.MockBean;
+import com.sync.changsha.gson.bean.ResultResponse;
 import com.sync.sz.core.common.utils.JsonUtil;
 import java.io.IOException;
 import java.util.Map;
@@ -51,13 +54,17 @@ public class GsonTest {
 
     System.out.println(json);
 
-    System.out.println(JSON.parseObject(json));
 
-    Map map = GsonHelper.convertEntity(json,Map.class);
+    //ResultResponse<MapBean> map = GsonHelper.convertEntity(json,ResultResponse.class);
 
-    System.out.println(map);
+    MapBeanWrapper wrapper = GsonHelper.convertEntity(json, MapBeanWrapper.class);
 
-    System.out.println(map.get("volunteerMap"));
+
+    System.out.println(wrapper);
+    System.out.println(wrapper.getData().getGainTotal());
+    System.out.println(wrapper.getData().getMomeyTotal());
+    System.out.println(wrapper.getData().getVolunteerMap());
+
   }
 
   public static void main(String[] args) {
