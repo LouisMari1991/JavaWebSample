@@ -1,13 +1,12 @@
 package com.sync.changsha.gson;
 
-import com.alibaba.fastjson.JSON;
 import com.sync.changsha.Utils.GsonHelper;
-import com.sync.changsha.gson.bean.MapBean;
 import com.sync.changsha.gson.bean.MapBeanWrapper;
 import com.sync.changsha.gson.bean.MockBean;
 import com.sync.changsha.gson.bean.ResultResponse;
 import com.sync.sz.core.common.utils.JsonUtil;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
@@ -54,17 +53,14 @@ public class GsonTest {
 
     System.out.println(json);
 
-
     //ResultResponse<MapBean> map = GsonHelper.convertEntity(json,ResultResponse.class);
 
     MapBeanWrapper wrapper = GsonHelper.convertEntity(json, MapBeanWrapper.class);
-
 
     System.out.println(wrapper);
     System.out.println(wrapper.getData().getGainTotal());
     System.out.println(wrapper.getData().getMomeyTotal());
     System.out.println(wrapper.getData().getVolunteerMap());
-
   }
 
   public static void main(String[] args) {
@@ -93,5 +89,27 @@ public class GsonTest {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  @Test
+  public void testArray() {
+    String str = "{\n"
+        + "    \"data\": [\n"
+        + "        {\n"
+        + "            \"2017-12-13\": \"A 银桥社区居委会居家养老服务中心\\n地址： 银杉路2附近\\nB 长\"\n"
+        + "        }\n"
+        + "    ],\n"
+        + "    \"msg\": \"\",\n"
+        + "    \"pages\": 0,\n"
+        + "    \"status\": 200,\n"
+        + "    \"total\": 0\n"
+        + "}";
+
+    System.out.println(str);
+
+    ResultResponse<List<Map<String, String>>> resultResponse = GsonHelper.convertEntity(str,
+        ResultResponse.class);
+    System.out.printf(resultResponse.toString());
+
   }
 }
