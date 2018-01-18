@@ -7,6 +7,9 @@ import org.junit.Test;
  */
 public class StringTest {
 
+  static int I = 301;
+  static int L = 0x302;
+
   @Test
   public void findStr() {
     String str0 = "18664569168";
@@ -14,6 +17,12 @@ public class StringTest {
     int start = str0.indexOf(str1);
     System.out.println(start);
     System.out.println(str0.substring(start, start + str1.length()));
+  }
+
+  @Test
+  public void sout() {
+    System.out.println(I);
+    System.out.println(L);
   }
 
 }
